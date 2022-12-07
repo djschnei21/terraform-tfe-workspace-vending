@@ -26,11 +26,17 @@ data "tfe_oauth_client" "client" {
   name         = "github-test"
 }
 
+resource "tfe_project" "test" {
+  organization = "djs-tfcb"
+  name = var.app_id
+}
+
 resource "tfe_workspace" "network_workspaces" {
   for_each = var.app_envs
 
   name         = "network-${var.app_id}-${each.key}"
   organization = "djs-tfcb"
+  project_id   = tfe_project.id
   tag_names    = ["vending-machine-demo"]
 
   vcs_repo {
@@ -45,6 +51,7 @@ resource "tfe_workspace" "compute_workspaces" {
 
   name         = "compute-${var.app_id}-${each.key}"
   organization = "djs-tfcb"
+  project_id   = tfe_project.id
   tag_names    = ["vending-machine-demo"]
 
   vcs_repo {
@@ -59,6 +66,7 @@ resource "tfe_workspace" "storage_workspaces" {
 
   name         = "storage-${var.app_id}-${each.key}"
   organization = "djs-tfcb"
+  project_id   = tfe_project.id
   tag_names    = ["vending-machine-demo"]
 
   vcs_repo {
