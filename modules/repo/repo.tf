@@ -7,8 +7,6 @@ terraform {
   }
 }
 
-provider "github" {}
-
 variable "app_id" {
     type = string
     default = ""

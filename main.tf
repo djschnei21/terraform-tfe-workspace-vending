@@ -10,8 +10,6 @@ terraform {
   }
 }
 
-provider "tfe" {}
-
 variable "app_ids" {
     type = set(string)
     default = []

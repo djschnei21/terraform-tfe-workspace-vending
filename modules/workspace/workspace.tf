@@ -6,8 +6,6 @@ terraform {
   }
 }
 
-provider "tfe" {}
-
 variable "repo" {
   type = string
   default = ""
