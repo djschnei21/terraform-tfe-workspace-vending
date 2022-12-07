@@ -34,7 +34,7 @@ resource "github_repository" "auto_repo" {
 
 resource "github_branch" "auto_repo" {
   repository = github_repository.auto_repo
-  for_each = var.app_envs
+  for_each = toset(var.app_envs)
 
   branch     = each.key
 }
