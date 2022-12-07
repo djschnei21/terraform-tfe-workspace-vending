@@ -21,13 +21,28 @@ variable "app_envs" {
   default = []
 }
 
+variable "gh_org" {
+  type = string
+  default = ""
+}
+
+variable "tf_org" {
+  type = string
+  default = ""
+}
+
+variable "oauth_client_name" {
+  type = string
+  default = ""
+}
+
 data "tfe_oauth_client" "client" {
-  organization = "djs-tfcb"
-  name         = "github-test"
+  organization = var.tf_org
+  name         = var.oauth_client_name
 }
 
 resource "tfe_project" "project" {
-  organization = "djs-tfcb"
+  organization = var.tf_org
   name = var.app_id
 }
 
@@ -35,12 +50,12 @@ resource "tfe_workspace" "network_workspaces" {
   for_each = var.app_envs
 
   name         = "${var.app_id}-${each.key}-network"
-  organization = "djs-tfcb"
+  organization = var.tf_org
   project_id   = tfe_project.project.id
   tag_names    = [var.app_id, each.key]
 
   vcs_repo {
-    identifier = "djschnei21/network-${var.app_id}"
+    identifier = "${var.gh_org}/network-${var.app_id}"
     branch = each.key
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }
@@ -50,12 +65,12 @@ resource "tfe_workspace" "compute_workspaces" {
   for_each = var.app_envs
 
   name         = "${var.app_id}-${each.key}-compute"
-  organization = "djs-tfcb"
+  organization = var.tf_org
   project_id   = tfe_project.project.id
   tag_names    = [var.app_id, each.key]
 
   vcs_repo {
-    identifier = "djschnei21/compute-${var.app_id}"
+    identifier = "${var.gh_org}/compute-${var.app_id}"
     branch = each.key
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }
@@ -65,12 +80,12 @@ resource "tfe_workspace" "storage_workspaces" {
   for_each = var.app_envs
 
   name         = "${var.app_id}-${each.key}-storage"
-  organization = "djs-tfcb"
+  organization = var.tf_org
   project_id   = tfe_project.project.id
   tag_names    = [var.app_id, each.key]
 
   vcs_repo {
-    identifier = "djschnei21/storage-${var.app_id}"
+    identifier = "${var.gh_org}/storage-${var.app_id}"
     branch = each.key
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }

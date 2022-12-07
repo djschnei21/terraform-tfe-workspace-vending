@@ -17,6 +17,11 @@ variable "app_envs" {
   default = []
 }
 
+variable "gh_org" {
+  type = string
+  default = ""
+}
+
 resource "github_repository" "network_auto_repo" {
   name        = "network-${var.app_id}"
   description = "My awesome codebase"
@@ -24,7 +29,7 @@ resource "github_repository" "network_auto_repo" {
   visibility = "public"
 
   template {
-      owner                = "djschnei21"
+      owner                = var.gh_org
       repository           = "workspace-template"
       include_all_branches = true
   }
@@ -44,7 +49,7 @@ resource "github_repository" "compute_auto_repo" {
   visibility = "public"
 
   template {
-      owner                = "djschnei21"
+      owner                = var.gh_org
       repository           = "workspace-template"
       include_all_branches = true
   }
@@ -64,7 +69,7 @@ resource "github_repository" "storage_auto_repo" {
   visibility = "public"
 
   template {
-      owner                = "djschnei21"
+      owner                = var.gh_org
       repository           = "workspace-template"
       include_all_branches = true
   }
