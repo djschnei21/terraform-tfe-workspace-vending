@@ -34,7 +34,7 @@ resource "tfe_project" "project" {
 resource "tfe_workspace" "network_workspaces" {
   for_each = var.app_envs
 
-  name         = "${each.key}-network"
+  name         = "${var.app_id}-${each.key}-network"
   organization = "djs-tfcb"
   project_id   = tfe_project.project.id
   tag_names    = [var.app_id, each.key]
@@ -49,7 +49,7 @@ resource "tfe_workspace" "network_workspaces" {
 resource "tfe_workspace" "compute_workspaces" {
   for_each = var.app_envs
 
-  name         = "${each.key}-compute"
+  name         = "${var.app_id}-${each.key}-compute"
   organization = "djs-tfcb"
   project_id   = tfe_project.project.id
   tag_names    = [var.app_id, each.key]
@@ -64,7 +64,7 @@ resource "tfe_workspace" "compute_workspaces" {
 resource "tfe_workspace" "storage_workspaces" {
   for_each = var.app_envs
 
-  name         = "${each.key}-storage"
+  name         = "${var.app_id}-${each.key}-storage"
   organization = "djs-tfcb"
   project_id   = tfe_project.project.id
   tag_names    = [var.app_id, each.key]
