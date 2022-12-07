@@ -26,7 +26,7 @@ resource "github_repository" "auto_repo" {
   visibility = "public"
 
   template {
-      owner                = "djschnei"
+      owner                = "djschnei21"
       repository           = "workspace-template"
       include_all_branches = true
   }
