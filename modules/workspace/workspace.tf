@@ -37,7 +37,7 @@ resource "tfe_workspace" "network_workspaces" {
   name         = "${each.key}-network"
   organization = "djs-tfcb"
   project_id   = tfe_project.project.id
-  tag_names    = ["vending-machine-demo", var.app_id, each.key]
+  tag_names    = [var.app_id, each.key]
 
   vcs_repo {
     identifier = "djschnei21/network-${var.app_id}"
@@ -52,7 +52,7 @@ resource "tfe_workspace" "compute_workspaces" {
   name         = "${each.key}-compute"
   organization = "djs-tfcb"
   project_id   = tfe_project.project.id
-  tag_names    = ["vending-machine-demo", var.app_id, each.key]
+  tag_names    = [var.app_id, each.key]
 
   vcs_repo {
     identifier = "djschnei21/compute-${var.app_id}"
@@ -67,7 +67,7 @@ resource "tfe_workspace" "storage_workspaces" {
   name         = "${each.key}-storage"
   organization = "djs-tfcb"
   project_id   = tfe_project.project.id
-  tag_names    = ["vending-machine-demo", var.app_id, each.key]
+  tag_names    = [var.app_id, each.key]
 
   vcs_repo {
     identifier = "djschnei21/storage-${var.app_id}"
