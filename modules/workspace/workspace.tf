@@ -24,7 +24,7 @@ variable "app_envs" {
 }
 
 resource "tfe_workspace" "workspaces" {
-  for_each = var.app_envs
+  for_each = toset(var.app_envs)
 
   name         = "app-${var.app_id}-${each.key}"
   organization = "djs-tfcb"
