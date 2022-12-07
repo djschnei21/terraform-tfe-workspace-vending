@@ -13,12 +13,12 @@ terraform {
 provider "tfe" {}
 
 variable "app_ids" {
-    type = list(string)
+    type = set(string)
     default = []
 }
 
 variable "app_envs" {
-  type = list(string)
+  type = set(string)
   default = ["development", "uat", "production"]
 }
 
