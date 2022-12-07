@@ -34,10 +34,10 @@ resource "tfe_project" "project" {
 resource "tfe_workspace" "network_workspaces" {
   for_each = var.app_envs
 
-  name         = "network-${var.app_id}-${each.key}"
+  name         = "${each.key}-network"
   organization = "djs-tfcb"
   project_id   = tfe_project.project.id
-  tag_names    = ["vending-machine-demo"]
+  tag_names    = ["vending-machine-demo", var.app_id, each.key]
 
   vcs_repo {
     identifier = "djschnei21/network-${var.app_id}"
@@ -49,10 +49,10 @@ resource "tfe_workspace" "network_workspaces" {
 resource "tfe_workspace" "compute_workspaces" {
   for_each = var.app_envs
 
-  name         = "compute-${var.app_id}-${each.key}"
+  name         = "${each.key}-compute"
   organization = "djs-tfcb"
   project_id   = tfe_project.project.id
-  tag_names    = ["vending-machine-demo"]
+  tag_names    = ["vending-machine-demo", var.app_id, each.key]
 
   vcs_repo {
     identifier = "djschnei21/compute-${var.app_id}"
@@ -64,10 +64,10 @@ resource "tfe_workspace" "compute_workspaces" {
 resource "tfe_workspace" "storage_workspaces" {
   for_each = var.app_envs
 
-  name         = "storage-${var.app_id}-${each.key}"
+  name         = "${each.key}-storage"
   organization = "djs-tfcb"
   project_id   = tfe_project.project.id
-  tag_names    = ["vending-machine-demo"]
+  tag_names    = ["vending-machine-demo", var.app_id, each.key]
 
   vcs_repo {
     identifier = "djschnei21/storage-${var.app_id}"
