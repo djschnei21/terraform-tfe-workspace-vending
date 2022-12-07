@@ -17,8 +17,8 @@ variable "app_envs" {
   default = []
 }
 
-resource "github_repository" "auto_repo" {
-  name        = "app-${var.app_id}"
+resource "github_repository" "network_auto_repo" {
+  name        = "network-${var.app_id}"
   description = "My awesome codebase"
 
   visibility = "public"
@@ -30,8 +30,48 @@ resource "github_repository" "auto_repo" {
   }
 }
 
-resource "github_branch" "auto_repo" {
-  repository = github_repository.auto_repo.name
+resource "github_branch" "network_auto_repo" {
+  repository = github_repository.network_auto_repo.name
+  for_each = var.app_envs
+
+  branch     = each.key
+}
+
+resource "github_repository" "compute_auto_repo" {
+  name        = "compute-${var.app_id}"
+  description = "My awesome codebase"
+
+  visibility = "public"
+
+  template {
+      owner                = "djschnei21"
+      repository           = "workspace-template"
+      include_all_branches = true
+  }
+}
+
+resource "github_branch" "compute_auto_repo" {
+  repository = github_repository.compute_auto_repo.name
+  for_each = var.app_envs
+
+  branch     = each.key
+}
+
+resource "github_repository" "storage_auto_repo" {
+  name        = "storage-${var.app_id}"
+  description = "My awesome codebase"
+
+  visibility = "public"
+
+  template {
+      owner                = "djschnei21"
+      repository           = "workspace-template"
+      include_all_branches = true
+  }
+}
+
+resource "github_branch" "storage_auto_repo" {
+  repository = github_repository.storage_auto_repo.name
   for_each = var.app_envs
 
   branch     = each.key
