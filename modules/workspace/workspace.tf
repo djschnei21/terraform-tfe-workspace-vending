@@ -28,5 +28,5 @@ resource "tfe_workspace" "workspaces" {
 
   name         = "app-${var.app_id}-${each.key}"
   organization = "djs-tfcb"
-  tag_names    = ["Vending-Machine-Demo"]
+  tag_names    = ["vending-machine-demo"]
 }
