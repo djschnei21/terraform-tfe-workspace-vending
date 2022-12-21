@@ -28,7 +28,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_app_envs"></a> [app\_envs](#input\_app\_envs) | A list of strings dictating the environment specific workspaces that will be created for your app | `set(string)` | n/a | yes |
-| <a name="input_app_id"></a> [app\_id](#input\_app\_id) | n/a | `string` | n/a | yes |
+| <a name="input_app_id"></a> [app\_id](#input\_app\_id) | The ID of whatever application you want to create workspaces for | `string` | n/a | yes |
 | <a name="input_gh_org"></a> [gh\_org](#input\_gh\_org) | The name of the GH org where your repos and OAuth client are configured | `string` | n/a | yes |
 | <a name="input_oauth_client_name"></a> [oauth\_client\_name](#input\_oauth\_client\_name) | The name of the VCS Provider OAuth Client which is configured in TFC | `string` | n/a | yes |
 | <a name="input_projects"></a> [projects](#input\_projects) | Whether or not you want to create an app specific TFC project to nest the workspaces inside of | `bool` | `false` | no |

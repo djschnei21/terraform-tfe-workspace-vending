@@ -8,7 +8,7 @@ terraform {
 
 variable "app_id" {
   type    = string
-  descripdescription = "The ID of whatever application you want to create workspaces for"
+  description = "The ID of whatever application you want to create workspaces for"
 }
 
 variable "app_envs" {

@@ -19,6 +19,7 @@ variable "app_envs" {
 
 variable "gh_org" {
   type    = string
+  description = "The name of the GH org where your repos will be created"
 }
 
 resource "github_repository" "base_auto_repo" {
