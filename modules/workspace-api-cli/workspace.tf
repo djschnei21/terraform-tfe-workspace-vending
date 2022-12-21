@@ -6,18 +6,18 @@ terraform {
   }
 }
 variable "app_id" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "app_envs" {
-  type = set(string)
+  type    = set(string)
   default = []
 }
 
 
 variable "tf_org" {
-  type = string
+  type    = string
   default = ""
 }
 
@@ -26,14 +26,14 @@ data "tfe_organization" "foo" {
 }
 
 variable "projects" {
-  type = bool
+  type    = bool
   default = false
 }
 
 resource "tfe_project" "project" {
-  count = var.projects == true ? 1 : 0 
+  count        = var.projects == true ? 1 : 0
   organization = var.tf_org
-  name = var.app_id
+  name         = var.app_id
 }
 
 resource "tfe_workspace" "lz_workspaces" {

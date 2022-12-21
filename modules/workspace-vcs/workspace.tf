@@ -7,37 +7,37 @@ terraform {
 }
 
 variable "repo" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "app_id" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "app_envs" {
-  type = set(string)
+  type    = set(string)
   default = []
 }
 
 variable "gh_org" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "tf_org" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "oauth_client_name" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "projects" {
-  type = bool
+  type    = bool
   default = false
 }
 
@@ -47,9 +47,9 @@ data "tfe_oauth_client" "client" {
 }
 
 resource "tfe_project" "project" {
-  count = var.projects == true ? 1 : 0 
+  count        = var.projects == true ? 1 : 0
   organization = var.tf_org
-  name = var.app_id
+  name         = var.app_id
 }
 
 resource "tfe_workspace" "lz_workspaces" {
@@ -61,8 +61,8 @@ resource "tfe_workspace" "lz_workspaces" {
   tag_names    = [var.app_id, each.key]
 
   vcs_repo {
-    identifier = "${var.gh_org}/${var.app_id}-lz"
-    branch = each.key
+    identifier     = "${var.gh_org}/${var.app_id}-lz"
+    branch         = each.key
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }
 }
@@ -76,8 +76,8 @@ resource "tfe_workspace" "app_workspaces" {
   tag_names    = [var.app_id, each.key]
 
   vcs_repo {
-    identifier = "${var.gh_org}/${var.app_id}-app"
-    branch = each.key
+    identifier     = "${var.gh_org}/${var.app_id}-app"
+    branch         = each.key
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }
 }

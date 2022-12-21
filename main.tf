@@ -2,70 +2,70 @@ terraform {
 }
 
 variable "app_ids" {
-    type = set(string)
-    default = []
+  type    = set(string)
+  default = []
 }
 
 variable "app_envs" {
-  type = set(string)
+  type    = set(string)
   default = ["development", "uat", "production"]
 }
 
 variable "gh_org" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "tf_org" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "oauth_client_name" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "vcs" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "projects" {
-  type = bool
+  type    = bool
   default = false
 }
 
 module "repos" {
-    source = "./modules/repo"
-    for_each = var.vcs == true ? toset(var.app_ids) : []
-    
-    app_id = each.key
-    app_envs = var.app_envs
-    gh_org = var.gh_org
+  source   = "./modules/repo"
+  for_each = var.vcs == true ? toset(var.app_ids) : []
+
+  app_id   = each.key
+  app_envs = var.app_envs
+  gh_org   = var.gh_org
 }
 
 module "workspaces-vcs" {
-    source = "./modules/workspace-vcs"
-    for_each = var.vcs == true ? toset(var.app_ids) : []
-    depends_on = [
-      module.repos
-    ]
+  source   = "./modules/workspace-vcs"
+  for_each = var.vcs == true ? toset(var.app_ids) : []
+  depends_on = [
+    module.repos
+  ]
 
-    projects = var.projects
-    app_id = each.key
-    app_envs = var.app_envs
-    gh_org = var.gh_org
-    tf_org = var.tf_org
-    oauth_client_name = var.oauth_client_name
+  projects          = var.projects
+  app_id            = each.key
+  app_envs          = var.app_envs
+  gh_org            = var.gh_org
+  tf_org            = var.tf_org
+  oauth_client_name = var.oauth_client_name
 }
 
 module "workspaces-api" {
-    source = "./modules/workspace-api-cli"
-    for_each = var.vcs == true ? toset([]) : toset(var.app_ids)
+  source   = "./modules/workspace-api-cli"
+  for_each = var.vcs == true ? toset([]) : toset(var.app_ids)
 
-    projects = var.projects
-    app_id = each.key
-    app_envs = var.app_envs
-    tf_org = var.tf_org
+  projects = var.projects
+  app_id   = each.key
+  app_envs = var.app_envs
+  tf_org   = var.tf_org
 }

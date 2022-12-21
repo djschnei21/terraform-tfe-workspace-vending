@@ -8,17 +8,17 @@ terraform {
 }
 
 variable "app_id" {
-    type = string
-    default = ""
+  type    = string
+  default = ""
 }
 
 variable "app_envs" {
-  type = set(string)
+  type    = set(string)
   default = []
 }
 
 variable "gh_org" {
-  type = string
+  type    = string
   default = ""
 }
 
@@ -29,17 +29,17 @@ resource "github_repository" "base_auto_repo" {
   visibility = "public"
 
   template {
-      owner                = var.gh_org
-      repository           = "workspace-template"
-      include_all_branches = true
+    owner                = var.gh_org
+    repository           = "workspace-template"
+    include_all_branches = true
   }
 }
 
 resource "github_branch" "base_auto_repo" {
   repository = github_repository.base_auto_repo.name
-  for_each = var.app_envs
+  for_each   = var.app_envs
 
-  branch     = each.key
+  branch = each.key
 }
 
 resource "github_repository" "app_auto_repo" {
@@ -49,15 +49,15 @@ resource "github_repository" "app_auto_repo" {
   visibility = "public"
 
   template {
-      owner                = var.gh_org
-      repository           = "workspace-template"
-      include_all_branches = true
+    owner                = var.gh_org
+    repository           = "workspace-template"
+    include_all_branches = true
   }
 }
 
 resource "github_branch" "app_auto_repo" {
   repository = github_repository.app_auto_repo.name
-  for_each = var.app_envs
+  for_each   = var.app_envs
 
-  branch     = each.key
+  branch = each.key
 }
