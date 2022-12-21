@@ -26,8 +26,14 @@ variable "oauth_client_name" {
   default = ""
 }
 
+variable "vcs" {
+  type = bool
+  default = true
+}
+
 module "repos" {
     source = "./modules/repo"
+    count = var.vcs == true ? 1 : 0 
 
     for_each = toset(var.app_ids)
     app_id = each.key
@@ -37,10 +43,8 @@ module "repos" {
 
 module "workspaces" {
     source = "./modules/workspace"
-    depends_on = [
-      module.repos
-    ]
 
+    vcs = var.vcs
     for_each = var.app_ids
     app_id = each.key
     app_envs = var.app_envs
