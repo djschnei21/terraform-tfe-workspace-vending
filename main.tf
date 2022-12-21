@@ -33,8 +33,8 @@ variable "vcs" {
 
 module "repos" {
     source = "./modules/repo"
-
     for_each = var.vcs == true ? toset(var.app_ids) : []
+    
     app_id = each.key
     app_envs = var.app_envs
     gh_org = var.gh_org
@@ -42,9 +42,9 @@ module "repos" {
 
 module "workspaces-vcs" {
     source = "./modules/workspace-vcs"
+    for_each = var.vcs == true ? toset(var.app_ids) : []
 
-    # for_each = toset([]) #var.vcs == true ? toset(var.app_ids) : []
-    count = 0 
+    vcs = var.vcs
     app_id = each.key
     app_envs = var.app_envs
     gh_org = var.gh_org
@@ -54,8 +54,9 @@ module "workspaces-vcs" {
 
 module "workspaces-api" {
     source = "./modules/workspace-api-cli"
-
     for_each = var.vcs == true ? toset([]) : toset(var.app_ids)
+
+    vcs = var.vcs
     app_id = each.key
     app_envs = var.app_envs
     tf_org = var.tf_org
