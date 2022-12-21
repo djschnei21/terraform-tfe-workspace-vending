@@ -42,7 +42,6 @@ variable "oauth_client_name" {
 }
 
 data "tfe_oauth_client" "client" {
-  count = var.vcs == true ? 1 : 0 
   organization = var.tf_org
   name         = var.oauth_client_name
 }
