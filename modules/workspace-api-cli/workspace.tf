@@ -21,6 +21,10 @@ variable "tf_org" {
   default = ""
 }
 
+data "tfe_organization" "foo" {
+  name = var.tf_org
+}
+
 # resource "tfe_project" "project" {
 #   organization = var.tf_org
 #   name = var.app_id
@@ -30,7 +34,7 @@ resource "tfe_workspace" "network_workspaces" {
   for_each = var.app_envs
 
   name         = "${var.app_id}-${each.key}-network"
-  organization = var.tf_org
+  organization = data.tfe_organization.foo.name
   # project_id   = tfe_project.project.id
   tag_names    = [var.app_id, each.key]
 }
@@ -39,7 +43,7 @@ resource "tfe_workspace" "compute_workspaces" {
   for_each = var.app_envs
 
   name         = "${var.app_id}-${each.key}-compute"
-  organization = var.tf_org
+  organization = data.tfe_organization.foo.name
   # project_id   = tfe_project.project.id
   tag_names    = [var.app_id, each.key]
 }
@@ -48,7 +52,7 @@ resource "tfe_workspace" "storage_workspaces" {
   for_each = var.app_envs
 
   name         = "${var.app_id}-${each.key}-storage"
-  organization = var.tf_org
+  organization = data.tfe_organization.foo.name
   # project_id   = tfe_project.project.id
   tag_names    = [var.app_id, each.key]
 }
