@@ -6,11 +6,6 @@ terraform {
   }
 }
 
-variable "vcs" {
-  type = bool
-  default = true
-}
-
 variable "repo" {
   type = string
   default = ""
@@ -42,7 +37,6 @@ variable "oauth_client_name" {
 }
 
 data "tfe_oauth_client" "client" {
-  count = var.vcs == true ? 1 : 0 
   organization = var.tf_org
   name         = var.oauth_client_name
 }
@@ -61,9 +55,9 @@ resource "tfe_workspace" "network_workspaces" {
   tag_names    = [var.app_id, each.key]
 
   vcs_repo {
-    identifier = var.vcs == true ? "${var.gh_org}/network-${var.app_id}" : null
-    branch = var.vcs == true ? each.key : null
-    oauth_token_id = var.vcs == true ? data.tfe_oauth_client.client[0].oauth_token_id : null
+    identifier = "${var.gh_org}/network-${var.app_id}"
+    branch = each.key
+    oauth_token_id = data.tfe_oauth_client.client[0].oauth_token_id
   }
 }
 
@@ -76,9 +70,9 @@ resource "tfe_workspace" "compute_workspaces" {
   tag_names    = [var.app_id, each.key]
 
   vcs_repo {
-    identifier = var.vcs == true ? "${var.gh_org}/compute-${var.app_id}" : null
-    branch = var.vcs == true ? each.key : null
-    oauth_token_id = var.vcs == true ? data.tfe_oauth_client.client[0].oauth_token_id : null
+    identifier = "${var.gh_org}/compute-${var.app_id}"
+    branch = each.key
+    oauth_token_id = data.tfe_oauth_client.client[0].oauth_token_id
   }
 }
 
@@ -91,8 +85,8 @@ resource "tfe_workspace" "storage_workspaces" {
   tag_names    = [var.app_id, each.key]
 
   vcs_repo {
-    identifier = var.vcs == true ? "${var.gh_org}/storage-${var.app_id}" : null
-    branch = var.vcs == true ? each.key : null
-    oauth_token_id = var.vcs == true ? data.tfe_oauth_client.client[0].oauth_token_id : null
+    identifier = "${var.gh_org}/storage-${var.app_id}"
+    branch = each.key
+    oauth_token_id = data.tfe_oauth_client.client[0].oauth_token_id
   }
 }

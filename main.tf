@@ -40,14 +40,23 @@ module "repos" {
     gh_org = var.gh_org
 }
 
-module "workspaces" {
-    source = "./modules/workspace"
+module "workspaces-vcs" {
+    source = "./modules/workspace-vcs"
 
     vcs = var.vcs
-    for_each = var.app_ids
+    for_each = var.vcs == true ? toset(var.app_ids) : []
     app_id = each.key
     app_envs = var.app_envs
     gh_org = var.gh_org
     tf_org = var.tf_org
     oauth_client_name = var.oauth_client_name
+}
+
+module "workspaces-api" {
+    source = "./modules/workspace-api-cli"
+
+    for_each = var.vcs == true ? [] : toset(var.app_ids)
+    app_id = each.key
+    app_envs = var.app_envs
+    tf_org = var.tf_org
 }
