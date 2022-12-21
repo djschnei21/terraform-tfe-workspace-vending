@@ -3,6 +3,11 @@
 This module has two modes; one which provision VCS backed workspaces and repos in GH, and another which does not provision repos and configures workspaces for CLI/API workflows.  At the very least the workspace using this module needs an environment variable set called TFE_TOKEN which is a valid user token with all required permissions for the target organization.  If you are using the VCS workflow mode, this workspace will also need a GITHUB_TOKEN environment variable set.
 
 ## VCS Example Usage
+### Pre-Reqs
+
+- 'TFE_TOKEN' environment variable on the workspace
+- 'GITHUB_TOKEN' environment variable on the workspace
+- A pre-configured OAuth Client connection between GH and TFC/E
 
 ```
 module "workspace-vending" {
@@ -22,6 +27,9 @@ module "workspace-vending" {
 ```
 
 ## CLI/API Example Usage
+### Pre-Reqs
+
+- 'TFE_TOKEN' environment variable on the workspace
 
 ```
 module "workspace-vending" {
