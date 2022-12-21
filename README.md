@@ -1,16 +1,10 @@
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_github"></a> [github](#requirement\_github) | ~> 5.0 |
-| <a name="requirement_tfe"></a> [tfe](#requirement\_tfe) | ~> 0.40.0 |
+No requirements.
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_github"></a> [github](#provider\_github) | ~> 5.0 |
-| <a name="provider_tfe"></a> [tfe](#provider\_tfe) | ~> 0.40.0 |
+No providers.
 
 ## Modules
 
@@ -29,7 +23,7 @@ No resources.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_app_envs"></a> [app\_envs](#input\_app\_envs) | A list of strings dictating the environment specific branches that will be created | `set(string)` | <pre>[<br>  "development",<br>  "uat",<br>  "production"<br>]</pre> | no |
-| <a name="input_app_ids"></a> [app\_ids](#input\_app\_ids) | A list of strings dictating the App names which will have workspaces created | `set(string)` | `[]` | no |
+| <a name="input_app_ids"></a> [app\_ids](#input\_app\_ids) | A list of strings dictating the App names which will have workspaces created | `set(string)` | <pre>[<br>  "001",<br>  "testapp",<br>  "CanBeAnything"<br>]</pre> | no |
 | <a name="input_gh_org"></a> [gh\_org](#input\_gh\_org) | The name of the GH org where your repos will be created and your OAuth client is configured.  You don't need to pass with if 'vcs = false' | `string` | `""` | no |
 | <a name="input_oauth_client_name"></a> [oauth\_client\_name](#input\_oauth\_client\_name) | The name of the VCS Provider OAuth Client which is configured in TFC.  You don't need to pass with if 'vcs = false' | `string` | `""` | no |
 | <a name="input_projects"></a> [projects](#input\_projects) | Determines whether or not projects are utilized in TFC (BETA Feature - not yet available on TFE) | `bool` | `false` | no |

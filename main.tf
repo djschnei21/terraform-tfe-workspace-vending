@@ -3,7 +3,7 @@ terraform {
 
 variable "app_ids" {
   type    = set(string)
-  default = []
+  default = ["001", "testapp", "CanBeAnything"]
   description = "A list of strings dictating the App names which will have workspaces created"
 }
 
