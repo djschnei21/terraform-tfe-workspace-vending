@@ -44,7 +44,7 @@ module "workspaces" {
     source = "./modules/workspace"
 
     vcs = var.vcs
-    for_each = var.vcs == true ? var.app_ids : []
+    for_each = var.app_ids
     app_id = each.key
     app_envs = var.app_envs
     gh_org = var.gh_org
