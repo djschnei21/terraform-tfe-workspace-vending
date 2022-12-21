@@ -47,6 +47,9 @@ resource "tfe_project" "project" {
 }
 
 resource "tfe_workspace" "network_workspaces" {
+  depends_on = [
+    tfe_project.project
+  ]
   for_each = var.app_envs
 
   name         = "${var.app_id}-${each.key}-network"
@@ -62,6 +65,10 @@ resource "tfe_workspace" "network_workspaces" {
 }
 
 resource "tfe_workspace" "compute_workspaces" {
+  depends_on = [
+    tfe_project.project
+  ]
+  
   for_each = var.app_envs
 
   name         = "${var.app_id}-${each.key}-compute"
@@ -77,6 +84,10 @@ resource "tfe_workspace" "compute_workspaces" {
 }
 
 resource "tfe_workspace" "storage_workspaces" {
+  depends_on = [
+    tfe_project.project
+  ]
+
   for_each = var.app_envs
 
   name         = "${var.app_id}-${each.key}-storage"
