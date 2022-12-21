@@ -5,26 +5,31 @@ terraform {
     }
   }
 }
+
 variable "app_id" {
   type    = string
+  descripdescription = "The ID of whatever application you want to create workspaces for"
 }
 
 variable "app_envs" {
   type    = set(string)
+  description = "A list of strings dictating the environment specific workspaces that will be created for your app"
 }
 
 
 variable "tf_org" {
   type    = string
-}
-
-data "tfe_organization" "foo" {
-  name = var.tf_org
+  description = "The name of the TFC organization you want to create workspaces within (TFE_TOKEN must be valid for this org)"
 }
 
 variable "projects" {
   type    = bool
   default = false
+  description = "Whether or not you want to create an app specific TFC project to nest the workspaces inside of"
+}
+
+data "tfe_organization" "foo" {
+  name = var.tf_org
 }
 
 resource "tfe_project" "project" {

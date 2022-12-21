@@ -6,33 +6,36 @@ terraform {
   }
 }
 
-variable "repo" {
-  type    = string
-}
-
 variable "app_id" {
   type    = string
+  descripdescription = "The ID of whatever application you want to create workspaces for"
 }
 
 variable "app_envs" {
   type    = set(string)
+  description = "A list of strings dictating the environment specific workspaces that will be created for your app"
 }
 
-variable "gh_org" {
-  type    = string
-}
 
 variable "tf_org" {
   type    = string
-}
-
-variable "oauth_client_name" {
-  type    = string
+  description = "The name of the TFC organization you want to create workspaces within (TFE_TOKEN must be valid for this org)"
 }
 
 variable "projects" {
   type    = bool
   default = false
+  description = "Whether or not you want to create an app specific TFC project to nest the workspaces inside of"
+}
+
+variable "gh_org" {
+  type    = string
+  description = "The name of the GH org where your repos and OAuth client are configured"
+}
+
+variable "oauth_client_name" {
+  type    = string
+  description = "The name of the VCS Provider OAuth Client which is configured in TFC"
 }
 
 data "tfe_oauth_client" "client" {

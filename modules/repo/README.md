@@ -27,8 +27,8 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_app_envs"></a> [app\_envs](#input\_app\_envs) | n/a | `set(string)` | n/a | yes |
-| <a name="input_app_id"></a> [app\_id](#input\_app\_id) | n/a | `string` | n/a | yes |
+| <a name="input_app_envs"></a> [app\_envs](#input\_app\_envs) | A list of strings dictating the environment specific branches that will be created | `set(string)` | n/a | yes |
+| <a name="input_app_id"></a> [app\_id](#input\_app\_id) | The ID of whatever application you want to create repos for | `string` | n/a | yes |
 | <a name="input_gh_org"></a> [gh\_org](#input\_gh\_org) | n/a | `string` | n/a | yes |
 
 ## Outputs

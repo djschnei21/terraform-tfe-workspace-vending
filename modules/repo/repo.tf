@@ -9,10 +9,12 @@ terraform {
 
 variable "app_id" {
   type    = string
+  description = "The ID of whatever application you want to create repos for"
 }
 
 variable "app_envs" {
   type    = set(string)
+  description = "A list of strings dictating the environment specific branches that will be created"
 }
 
 variable "gh_org" {
