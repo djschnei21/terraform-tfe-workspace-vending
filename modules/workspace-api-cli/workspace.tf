@@ -21,10 +21,10 @@ variable "tf_org" {
   default = ""
 }
 
-resource "tfe_project" "project" {
-  organization = var.tf_org
-  name = var.app_id
-}
+# resource "tfe_project" "project" {
+#   organization = var.tf_org
+#   name = var.app_id
+# }
 
 resource "tfe_workspace" "network_workspaces" {
   depends_on = [
@@ -34,7 +34,7 @@ resource "tfe_workspace" "network_workspaces" {
 
   name         = "${var.app_id}-${each.key}-network"
   organization = var.tf_org
-  project_id   = tfe_project.project.id
+  # project_id   = tfe_project.project.id
   tag_names    = [var.app_id, each.key]
 }
 
@@ -46,7 +46,7 @@ resource "tfe_workspace" "compute_workspaces" {
 
   name         = "${var.app_id}-${each.key}-compute"
   organization = var.tf_org
-  project_id   = tfe_project.project.id
+  # project_id   = tfe_project.project.id
   tag_names    = [var.app_id, each.key]
 }
 
@@ -58,6 +58,6 @@ resource "tfe_workspace" "storage_workspaces" {
 
   name         = "${var.app_id}-${each.key}-storage"
   organization = var.tf_org
-  project_id   = tfe_project.project.id
+  # project_id   = tfe_project.project.id
   tag_names    = [var.app_id, each.key]
 }
