@@ -27,10 +27,10 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_app_envs"></a> [app\_envs](#input\_app\_envs) | n/a | `set(string)` | `[]` | no |
-| <a name="input_app_id"></a> [app\_id](#input\_app\_id) | n/a | `string` | `""` | no |
+| <a name="input_app_envs"></a> [app\_envs](#input\_app\_envs) | n/a | `set(string)` | n/a | yes |
+| <a name="input_app_id"></a> [app\_id](#input\_app\_id) | n/a | `string` | n/a | yes |
 | <a name="input_projects"></a> [projects](#input\_projects) | n/a | `bool` | `false` | no |
-| <a name="input_tf_org"></a> [tf\_org](#input\_tf\_org) | n/a | `string` | `""` | no |
+| <a name="input_tf_org"></a> [tf\_org](#input\_tf\_org) | n/a | `string` | n/a | yes |
 
 ## Outputs
 

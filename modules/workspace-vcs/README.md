@@ -27,13 +27,13 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_app_envs"></a> [app\_envs](#input\_app\_envs) | n/a | `set(string)` | `[]` | no |
-| <a name="input_app_id"></a> [app\_id](#input\_app\_id) | n/a | `string` | `""` | no |
-| <a name="input_gh_org"></a> [gh\_org](#input\_gh\_org) | n/a | `string` | `""` | no |
-| <a name="input_oauth_client_name"></a> [oauth\_client\_name](#input\_oauth\_client\_name) | n/a | `string` | `""` | no |
+| <a name="input_app_envs"></a> [app\_envs](#input\_app\_envs) | n/a | `set(string)` | n/a | yes |
+| <a name="input_app_id"></a> [app\_id](#input\_app\_id) | n/a | `string` | n/a | yes |
+| <a name="input_gh_org"></a> [gh\_org](#input\_gh\_org) | n/a | `string` | n/a | yes |
+| <a name="input_oauth_client_name"></a> [oauth\_client\_name](#input\_oauth\_client\_name) | n/a | `string` | n/a | yes |
 | <a name="input_projects"></a> [projects](#input\_projects) | n/a | `bool` | `false` | no |
-| <a name="input_repo"></a> [repo](#input\_repo) | n/a | `string` | `""` | no |
-| <a name="input_tf_org"></a> [tf\_org](#input\_tf\_org) | n/a | `string` | `""` | no |
+| <a name="input_repo"></a> [repo](#input\_repo) | n/a | `string` | n/a | yes |
+| <a name="input_tf_org"></a> [tf\_org](#input\_tf\_org) | n/a | `string` | n/a | yes |
 
 ## Outputs
 

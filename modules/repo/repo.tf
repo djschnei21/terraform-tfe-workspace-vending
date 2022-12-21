@@ -9,17 +9,14 @@ terraform {
 
 variable "app_id" {
   type    = string
-  default = ""
 }
 
 variable "app_envs" {
   type    = set(string)
-  default = []
 }
 
 variable "gh_org" {
   type    = string
-  default = ""
 }
 
 resource "github_repository" "base_auto_repo" {

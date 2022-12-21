@@ -8,32 +8,26 @@ terraform {
 
 variable "repo" {
   type    = string
-  default = ""
 }
 
 variable "app_id" {
   type    = string
-  default = ""
 }
 
 variable "app_envs" {
   type    = set(string)
-  default = []
 }
 
 variable "gh_org" {
   type    = string
-  default = ""
 }
 
 variable "tf_org" {
   type    = string
-  default = ""
 }
 
 variable "oauth_client_name" {
   type    = string
-  default = ""
 }
 
 variable "projects" {

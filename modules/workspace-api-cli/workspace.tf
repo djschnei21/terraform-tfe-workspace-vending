@@ -7,18 +7,15 @@ terraform {
 }
 variable "app_id" {
   type    = string
-  default = ""
 }
 
 variable "app_envs" {
   type    = set(string)
-  default = []
 }
 
 
 variable "tf_org" {
   type    = string
-  default = ""
 }
 
 data "tfe_organization" "foo" {
