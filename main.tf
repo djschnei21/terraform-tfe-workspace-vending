@@ -31,6 +31,11 @@ variable "vcs" {
   default = true
 }
 
+variable "projects" {
+  type = bool
+  default = false
+}
+
 module "repos" {
     source = "./modules/repo"
     for_each = var.vcs == true ? toset(var.app_ids) : []
@@ -47,6 +52,7 @@ module "workspaces-vcs" {
       module.repos
     ]
 
+    projects = var.projects
     app_id = each.key
     app_envs = var.app_envs
     gh_org = var.gh_org
@@ -58,6 +64,7 @@ module "workspaces-api" {
     source = "./modules/workspace-api-cli"
     for_each = var.vcs == true ? toset([]) : toset(var.app_ids)
 
+    projects = var.projects
     app_id = each.key
     app_envs = var.app_envs
     tf_org = var.tf_org

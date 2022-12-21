@@ -22,9 +22,9 @@ variable "gh_org" {
   default = ""
 }
 
-resource "github_repository" "network_auto_repo" {
-  name        = "network-${var.app_id}"
-  description = "My awesome codebase"
+resource "github_repository" "base_auto_repo" {
+  name        = "${var.app_id}-lz"
+  description = "Used to provision all base infra resources for ${var.app_id} (networking, IAM, etc...)"
 
   visibility = "public"
 
@@ -35,16 +35,16 @@ resource "github_repository" "network_auto_repo" {
   }
 }
 
-resource "github_branch" "network_auto_repo" {
-  repository = github_repository.network_auto_repo.name
+resource "github_branch" "base_auto_repo" {
+  repository = github_repository.base_auto_repo.name
   for_each = var.app_envs
 
   branch     = each.key
 }
 
-resource "github_repository" "compute_auto_repo" {
-  name        = "compute-${var.app_id}"
-  description = "My awesome codebase"
+resource "github_repository" "app_auto_repo" {
+  name        = "${var.app_id}-app"
+  description = "Used to provision app resources for ${var.app_id}"
 
   visibility = "public"
 
@@ -55,28 +55,8 @@ resource "github_repository" "compute_auto_repo" {
   }
 }
 
-resource "github_branch" "compute_auto_repo" {
-  repository = github_repository.compute_auto_repo.name
-  for_each = var.app_envs
-
-  branch     = each.key
-}
-
-resource "github_repository" "storage_auto_repo" {
-  name        = "storage-${var.app_id}"
-  description = "My awesome codebase"
-
-  visibility = "public"
-
-  template {
-      owner                = var.gh_org
-      repository           = "workspace-template"
-      include_all_branches = true
-  }
-}
-
-resource "github_branch" "storage_auto_repo" {
-  repository = github_repository.storage_auto_repo.name
+resource "github_branch" "app_auto_repo" {
+  repository = github_repository.app_auto_repo.name
   for_each = var.app_envs
 
   branch     = each.key
