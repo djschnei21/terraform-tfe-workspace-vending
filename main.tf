@@ -43,6 +43,9 @@ module "repos" {
 module "workspaces-vcs" {
     source = "./modules/workspace-vcs"
     for_each = var.vcs == true ? toset(var.app_ids) : []
+    depends_on = [
+      module.repos
+    ]
 
     app_id = each.key
     app_envs = var.app_envs
