@@ -43,7 +43,8 @@ module "repos" {
 module "workspaces-vcs" {
     source = "./modules/workspace-vcs"
 
-    for_each = toset([]) #var.vcs == true ? toset(var.app_ids) : []
+    # for_each = toset([]) #var.vcs == true ? toset(var.app_ids) : []
+    count = 0 
     app_id = each.key
     app_envs = var.app_envs
     gh_org = var.gh_org
