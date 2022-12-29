@@ -44,7 +44,7 @@ resource "tfe_workspace" "lz_workspaces" {
   name         = "${each.key}-${var.app_id}-lz"
   organization = var.tf_org
   project_id   = var.projects == true ? tfe_project.project[0].id : null
-  tag_names    = [var.app_id, each.key]
+  #tag_names    = [var.app_id, each.key]
 }
 
 resource "tfe_workspace" "app_workspaces" {
@@ -53,5 +53,5 @@ resource "tfe_workspace" "app_workspaces" {
   name         = "${each.key}-${var.app_id}-app"
   organization = var.tf_org
   project_id   = var.projects == true ? tfe_project.project[0].id : null
-  tag_names    = [var.app_id, each.key]
+  #tag_names    = [var.app_id, each.key]
 }
