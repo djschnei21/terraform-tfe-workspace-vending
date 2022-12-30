@@ -80,5 +80,5 @@ resource "tfe_workspace" "app_workspaces" {
 }
 
 output "workspaces" {
-  value = toset(tfe_workspace.app_workspaces[*].name)
+  value = setunion(tfe_workspace.app_workspaces.*.name, tfe_workspace.lz_workspaces.*.name)
 }
