@@ -78,3 +78,7 @@ resource "tfe_workspace" "app_workspaces" {
     oauth_token_id = data.tfe_oauth_client.client.oauth_token_id
   }
 }
+
+output "workspaces" {
+  value = toset(tfe_workspace.app_workspaces[*].name)
+}
