@@ -75,7 +75,3 @@ module "workspaces-api" {
   app_envs = var.app_envs
   tf_org   = var.tf_org
 }
-
-output "workspaces" {
-  value = module.workspaces-vcs.workspaces
-}
