@@ -38,14 +38,14 @@ resource "tfe_project" "project" {
   name         = var.app_id
 }
 
-resource "tfe_workspace" "lz_workspaces" {
-  for_each = var.app_envs
+# resource "tfe_workspace" "lz_workspaces" {
+#   for_each = var.app_envs
 
-  name         = "${each.key}-${var.app_id}-lz"
-  organization = var.tf_org
-  project_id   = var.projects == true ? tfe_project.project[0].id : null
-  #tag_names    = [var.app_id, each.key]
-}
+#   name         = "${each.key}-${var.app_id}-lz"
+#   organization = var.tf_org
+#   project_id   = var.projects == true ? tfe_project.project[0].id : null
+#   #tag_names    = [var.app_id, each.key]
+# }
 
 resource "tfe_workspace" "app_workspaces" {
   for_each = var.app_envs

@@ -22,25 +22,25 @@ variable "gh_org" {
   description = "The name of the GH org where your repos will be created"
 }
 
-resource "github_repository" "base_auto_repo" {
-  name        = "${var.app_id}-lz"
-  description = "Used to provision all base infra resources for ${var.app_id} (networking, IAM, etc...)"
+# resource "github_repository" "base_auto_repo" {
+#   name        = "${var.app_id}-lz"
+#   description = "Used to provision all base infra resources for ${var.app_id} (networking, IAM, etc...)"
 
-  visibility = "public"
+#   visibility = "public"
 
-  template {
-    owner                = var.gh_org
-    repository           = "workspace-template"
-    include_all_branches = true
-  }
-}
+#   template {
+#     owner                = var.gh_org
+#     repository           = "workspace-template"
+#     include_all_branches = true
+#   }
+# }
 
-resource "github_branch" "base_auto_repo" {
-  repository = github_repository.base_auto_repo.name
-  for_each   = var.app_envs
+# resource "github_branch" "base_auto_repo" {
+#   repository = github_repository.base_auto_repo.name
+#   for_each   = var.app_envs
 
-  branch = each.key
-}
+#   branch = each.key
+# }
 
 resource "github_repository" "app_auto_repo" {
   name        = "${var.app_id}-app"
